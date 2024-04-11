@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e6c65efabe74c50b745583557d6b2ea" Name="Diagram1">
+        <EntityTypeShape EntityType="crafty_handsModel.categories" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.departaments" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.discount" Width="1.5" PointX="1.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.employees" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.order_details" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.orders" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.products" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.specializations" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.suppliers" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="crafty_handsModel.warehouse" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="crafty_handsModel.FK__categorie__depar__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__products__catego__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__employees__depar__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__orders__discount__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__employees__order__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__employees__speci__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__order_det__emplo__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__order_det__order__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__order_det__produ__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__warehouse__produ__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="crafty_handsModel.FK__warehouse__suppl__6477ECF3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

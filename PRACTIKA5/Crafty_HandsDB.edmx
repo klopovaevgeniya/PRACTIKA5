@@ -1,0 +1,799 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище crafty_handsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="ID_category" />
+          </Key>
+          <Property Name="ID_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_of_category" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="departament_ID" Type="int" />
+          <Property Name="descriptions" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="departaments">
+          <Key>
+            <PropertyRef Name="ID_departament" />
+          </Key>
+          <Property Name="ID_departament" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_of_departament" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descriptions" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="ID_discount" />
+          </Key>
+          <Property Name="ID_discount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_of_discount" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="discount_percentage" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="ID_employee" />
+          </Key>
+          <Property Name="ID_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="midlename" Type="varchar" MaxLength="100" />
+          <Property Name="phone_number" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="logins" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="passwords" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="specialization_ID" Type="int" Nullable="false" />
+          <Property Name="departament_ID" Type="int" />
+          <Property Name="order_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="order_details">
+          <Key>
+            <PropertyRef Name="ID_order_detail" />
+          </Key>
+          <Property Name="ID_order_detail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_ID" Type="int" />
+          <Property Name="product_ID" Type="int" />
+          <Property Name="employee_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="ID_order" />
+          </Key>
+          <Property Name="ID_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number_of_order" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="total_amount" Type="int" Nullable="false" />
+          <Property Name="payment_method" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="discount_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="ID_product" />
+          </Key>
+          <Property Name="ID_product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_of_product" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="descriptions" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="category_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="specializations">
+          <Key>
+            <PropertyRef Name="ID_specialization" />
+          </Key>
+          <Property Name="ID_specialization" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_of_specialization" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="suppliers">
+          <Key>
+            <PropertyRef Name="ID_supplier" />
+          </Key>
+          <Property Name="ID_supplier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="name_of_supplier" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="date_of_delivery" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="warehouse">
+          <Key>
+            <PropertyRef Name="ID_warehouse" />
+          </Key>
+          <Property Name="ID_warehouse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="product_ID" Type="int" />
+          <Property Name="supplier_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK__categorie__depar__4BAC3F29">
+          <End Role="departaments" Type="Self.departaments" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="categories" Type="Self.categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departaments">
+              <PropertyRef Name="ID_departament" />
+            </Principal>
+            <Dependent Role="categories">
+              <PropertyRef Name="departament_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__depar__5AEE82B9">
+          <End Role="departaments" Type="Self.departaments" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departaments">
+              <PropertyRef Name="ID_departament" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="departament_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__order__5BE2A6F2">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="ID_order" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__speci__59FA5E80">
+          <End Role="specializations" Type="Self.specializations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="specializations">
+              <PropertyRef Name="ID_specialization" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="specialization_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__emplo__5EBF139D">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID_employee" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__order__5FB337D6">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="ID_order" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__produ__60A75C0F">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="ID_product" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__discount__534D60F1">
+          <End Role="discount" Type="Self.discount" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount">
+              <PropertyRef Name="ID_discount" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="discount_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__products__catego__4E88ABD4">
+          <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="ID_category" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__warehouse__produ__6383C8BA">
+          <End Role="products" Type="Self.products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="warehouse" Type="Self.warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="ID_product" />
+            </Principal>
+            <Dependent Role="warehouse">
+              <PropertyRef Name="product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__warehouse__suppl__6477ECF3">
+          <End Role="suppliers" Type="Self.suppliers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="warehouse" Type="Self.warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="suppliers">
+              <PropertyRef Name="ID_supplier" />
+            </Principal>
+            <Dependent Role="warehouse">
+              <PropertyRef Name="supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище crafty_handsModelContainer">
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="departaments" EntityType="Self.departaments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="discount" EntityType="Self.discount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_details" EntityType="Self.order_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="specializations" EntityType="Self.specializations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="suppliers" EntityType="Self.suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="warehouse" EntityType="Self.warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__categorie__depar__4BAC3F29" Association="Self.FK__categorie__depar__4BAC3F29">
+            <End Role="departaments" EntitySet="departaments" />
+            <End Role="categories" EntitySet="categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__depar__5AEE82B9" Association="Self.FK__employees__depar__5AEE82B9">
+            <End Role="departaments" EntitySet="departaments" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__order__5BE2A6F2" Association="Self.FK__employees__order__5BE2A6F2">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__speci__59FA5E80" Association="Self.FK__employees__speci__59FA5E80">
+            <End Role="specializations" EntitySet="specializations" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__emplo__5EBF139D" Association="Self.FK__order_det__emplo__5EBF139D">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__order__5FB337D6" Association="Self.FK__order_det__order__5FB337D6">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__produ__60A75C0F" Association="Self.FK__order_det__produ__60A75C0F">
+            <End Role="products" EntitySet="products" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__discount__534D60F1" Association="Self.FK__orders__discount__534D60F1">
+            <End Role="discount" EntitySet="discount" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__products__catego__4E88ABD4" Association="Self.FK__products__catego__4E88ABD4">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__warehouse__produ__6383C8BA" Association="Self.FK__warehouse__produ__6383C8BA">
+            <End Role="products" EntitySet="products" />
+            <End Role="warehouse" EntitySet="warehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__warehouse__suppl__6477ECF3" Association="Self.FK__warehouse__suppl__6477ECF3">
+            <End Role="suppliers" EntitySet="suppliers" />
+            <End Role="warehouse" EntitySet="warehouse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="crafty_handsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="ID_category" />
+          </Key>
+          <Property Name="ID_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_of_category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="departament_ID" Type="Int32" />
+          <Property Name="descriptions" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="departaments" Relationship="Self.FK__categorie__depar__4BAC3F29" FromRole="categories" ToRole="departaments" />
+          <NavigationProperty Name="products" Relationship="Self.FK__products__catego__4E88ABD4" FromRole="categories" ToRole="products" />
+        </EntityType>
+        <EntityType Name="departaments">
+          <Key>
+            <PropertyRef Name="ID_departament" />
+          </Key>
+          <Property Name="ID_departament" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_of_departament" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descriptions" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="categories" Relationship="Self.FK__categorie__depar__4BAC3F29" FromRole="departaments" ToRole="categories" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employees__depar__5AEE82B9" FromRole="departaments" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="ID_discount" />
+          </Key>
+          <Property Name="ID_discount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_of_discount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="discount_percentage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__orders__discount__534D60F1" FromRole="discount" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="ID_employee" />
+          </Key>
+          <Property Name="ID_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="midlename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="phone_number" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="logins" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passwords" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="specialization_ID" Type="Int32" Nullable="false" />
+          <Property Name="departament_ID" Type="Int32" />
+          <Property Name="order_ID" Type="Int32" />
+          <NavigationProperty Name="departaments" Relationship="Self.FK__employees__depar__5AEE82B9" FromRole="employees" ToRole="departaments" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__employees__order__5BE2A6F2" FromRole="employees" ToRole="orders" />
+          <NavigationProperty Name="specializations" Relationship="Self.FK__employees__speci__59FA5E80" FromRole="employees" ToRole="specializations" />
+          <NavigationProperty Name="order_details" Relationship="Self.FK__order_det__emplo__5EBF139D" FromRole="employees" ToRole="order_details" />
+        </EntityType>
+        <EntityType Name="order_details">
+          <Key>
+            <PropertyRef Name="ID_order_detail" />
+          </Key>
+          <Property Name="ID_order_detail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_ID" Type="Int32" />
+          <Property Name="product_ID" Type="Int32" />
+          <Property Name="employee_ID" Type="Int32" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__order_det__emplo__5EBF139D" FromRole="order_details" ToRole="employees" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__order_det__order__5FB337D6" FromRole="order_details" ToRole="orders" />
+          <NavigationProperty Name="products" Relationship="Self.FK__order_det__produ__60A75C0F" FromRole="order_details" ToRole="products" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="ID_order" />
+          </Key>
+          <Property Name="ID_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number_of_order" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="total_amount" Type="Int32" Nullable="false" />
+          <Property Name="payment_method" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="discount_ID" Type="Int32" />
+          <NavigationProperty Name="discount" Relationship="Self.FK__orders__discount__534D60F1" FromRole="orders" ToRole="discount" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employees__order__5BE2A6F2" FromRole="orders" ToRole="employees" />
+          <NavigationProperty Name="order_details" Relationship="Self.FK__order_det__order__5FB337D6" FromRole="orders" ToRole="order_details" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="ID_product" />
+          </Key>
+          <Property Name="ID_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_of_product" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="descriptions" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="category_ID" Type="Int32" />
+          <NavigationProperty Name="categories" Relationship="Self.FK__products__catego__4E88ABD4" FromRole="products" ToRole="categories" />
+          <NavigationProperty Name="order_details" Relationship="Self.FK__order_det__produ__60A75C0F" FromRole="products" ToRole="order_details" />
+          <NavigationProperty Name="warehouse" Relationship="Self.FK__warehouse__produ__6383C8BA" FromRole="products" ToRole="warehouse" />
+        </EntityType>
+        <EntityType Name="specializations">
+          <Key>
+            <PropertyRef Name="ID_specialization" />
+          </Key>
+          <Property Name="ID_specialization" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_of_specialization" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employees__speci__59FA5E80" FromRole="specializations" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="suppliers">
+          <Key>
+            <PropertyRef Name="ID_supplier" />
+          </Key>
+          <Property Name="ID_supplier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name_of_supplier" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_of_delivery" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="warehouse" Relationship="Self.FK__warehouse__suppl__6477ECF3" FromRole="suppliers" ToRole="warehouse" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="warehouse">
+          <Key>
+            <PropertyRef Name="ID_warehouse" />
+          </Key>
+          <Property Name="ID_warehouse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="product_ID" Type="Int32" />
+          <Property Name="supplier_ID" Type="Int32" />
+          <NavigationProperty Name="products" Relationship="Self.FK__warehouse__produ__6383C8BA" FromRole="warehouse" ToRole="products" />
+          <NavigationProperty Name="suppliers" Relationship="Self.FK__warehouse__suppl__6477ECF3" FromRole="warehouse" ToRole="suppliers" />
+        </EntityType>
+        <Association Name="FK__categorie__depar__4BAC3F29">
+          <End Role="departaments" Type="Self.departaments" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="categories" Type="Self.categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departaments">
+              <PropertyRef Name="ID_departament" />
+            </Principal>
+            <Dependent Role="categories">
+              <PropertyRef Name="departament_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__products__catego__4E88ABD4">
+          <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="ID_category" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__depar__5AEE82B9">
+          <End Role="departaments" Type="Self.departaments" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departaments">
+              <PropertyRef Name="ID_departament" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="departament_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__discount__534D60F1">
+          <End Role="discount" Type="Self.discount" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount">
+              <PropertyRef Name="ID_discount" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="discount_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__order__5BE2A6F2">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="ID_order" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__speci__59FA5E80">
+          <End Role="specializations" Type="Self.specializations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="specializations">
+              <PropertyRef Name="ID_specialization" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="specialization_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__emplo__5EBF139D">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID_employee" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__order__5FB337D6">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="ID_order" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__produ__60A75C0F">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="ID_product" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__warehouse__produ__6383C8BA">
+          <End Role="products" Type="Self.products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="warehouse" Type="Self.warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="ID_product" />
+            </Principal>
+            <Dependent Role="warehouse">
+              <PropertyRef Name="product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__warehouse__suppl__6477ECF3">
+          <End Role="suppliers" Type="Self.suppliers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="warehouse" Type="Self.warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="suppliers">
+              <PropertyRef Name="ID_supplier" />
+            </Principal>
+            <Dependent Role="warehouse">
+              <PropertyRef Name="supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="crafty_handsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categories" EntityType="Self.categories" />
+          <EntitySet Name="departaments" EntityType="Self.departaments" />
+          <EntitySet Name="discount" EntityType="Self.discount" />
+          <EntitySet Name="employees" EntityType="Self.employees" />
+          <EntitySet Name="order_details" EntityType="Self.order_details" />
+          <EntitySet Name="orders" EntityType="Self.orders" />
+          <EntitySet Name="products" EntityType="Self.products" />
+          <EntitySet Name="specializations" EntityType="Self.specializations" />
+          <EntitySet Name="suppliers" EntityType="Self.suppliers" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="warehouse" EntityType="Self.warehouse" />
+          <AssociationSet Name="FK__categorie__depar__4BAC3F29" Association="Self.FK__categorie__depar__4BAC3F29">
+            <End Role="departaments" EntitySet="departaments" />
+            <End Role="categories" EntitySet="categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__products__catego__4E88ABD4" Association="Self.FK__products__catego__4E88ABD4">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__depar__5AEE82B9" Association="Self.FK__employees__depar__5AEE82B9">
+            <End Role="departaments" EntitySet="departaments" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__discount__534D60F1" Association="Self.FK__orders__discount__534D60F1">
+            <End Role="discount" EntitySet="discount" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__order__5BE2A6F2" Association="Self.FK__employees__order__5BE2A6F2">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__speci__59FA5E80" Association="Self.FK__employees__speci__59FA5E80">
+            <End Role="specializations" EntitySet="specializations" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__emplo__5EBF139D" Association="Self.FK__order_det__emplo__5EBF139D">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__order__5FB337D6" Association="Self.FK__order_det__order__5FB337D6">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__produ__60A75C0F" Association="Self.FK__order_det__produ__60A75C0F">
+            <End Role="products" EntitySet="products" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__warehouse__produ__6383C8BA" Association="Self.FK__warehouse__produ__6383C8BA">
+            <End Role="products" EntitySet="products" />
+            <End Role="warehouse" EntitySet="warehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__warehouse__suppl__6477ECF3" Association="Self.FK__warehouse__suppl__6477ECF3">
+            <End Role="suppliers" EntitySet="suppliers" />
+            <End Role="warehouse" EntitySet="warehouse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище crafty_handsModelContainer" CdmEntityContainer="crafty_handsEntities">
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="crafty_handsModel.categories">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="ID_category" ColumnName="ID_category" />
+                <ScalarProperty Name="name_of_category" ColumnName="name_of_category" />
+                <ScalarProperty Name="departament_ID" ColumnName="departament_ID" />
+                <ScalarProperty Name="descriptions" ColumnName="descriptions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departaments">
+            <EntityTypeMapping TypeName="crafty_handsModel.departaments">
+              <MappingFragment StoreEntitySet="departaments">
+                <ScalarProperty Name="ID_departament" ColumnName="ID_departament" />
+                <ScalarProperty Name="name_of_departament" ColumnName="name_of_departament" />
+                <ScalarProperty Name="descriptions" ColumnName="descriptions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="discount">
+            <EntityTypeMapping TypeName="crafty_handsModel.discount">
+              <MappingFragment StoreEntitySet="discount">
+                <ScalarProperty Name="ID_discount" ColumnName="ID_discount" />
+                <ScalarProperty Name="name_of_discount" ColumnName="name_of_discount" />
+                <ScalarProperty Name="discount_percentage" ColumnName="discount_percentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="crafty_handsModel.employees">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="ID_employee" ColumnName="ID_employee" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="midlename" ColumnName="midlename" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="logins" ColumnName="logins" />
+                <ScalarProperty Name="passwords" ColumnName="passwords" />
+                <ScalarProperty Name="specialization_ID" ColumnName="specialization_ID" />
+                <ScalarProperty Name="departament_ID" ColumnName="departament_ID" />
+                <ScalarProperty Name="order_ID" ColumnName="order_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_details">
+            <EntityTypeMapping TypeName="crafty_handsModel.order_details">
+              <MappingFragment StoreEntitySet="order_details">
+                <ScalarProperty Name="ID_order_detail" ColumnName="ID_order_detail" />
+                <ScalarProperty Name="order_ID" ColumnName="order_ID" />
+                <ScalarProperty Name="product_ID" ColumnName="product_ID" />
+                <ScalarProperty Name="employee_ID" ColumnName="employee_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="crafty_handsModel.orders">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="ID_order" ColumnName="ID_order" />
+                <ScalarProperty Name="number_of_order" ColumnName="number_of_order" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="discount_ID" ColumnName="discount_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="crafty_handsModel.products">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="ID_product" ColumnName="ID_product" />
+                <ScalarProperty Name="name_of_product" ColumnName="name_of_product" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="descriptions" ColumnName="descriptions" />
+                <ScalarProperty Name="category_ID" ColumnName="category_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="specializations">
+            <EntityTypeMapping TypeName="crafty_handsModel.specializations">
+              <MappingFragment StoreEntitySet="specializations">
+                <ScalarProperty Name="ID_specialization" ColumnName="ID_specialization" />
+                <ScalarProperty Name="name_of_specialization" ColumnName="name_of_specialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="suppliers">
+            <EntityTypeMapping TypeName="crafty_handsModel.suppliers">
+              <MappingFragment StoreEntitySet="suppliers">
+                <ScalarProperty Name="ID_supplier" ColumnName="ID_supplier" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="name_of_supplier" ColumnName="name_of_supplier" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="date_of_delivery" ColumnName="date_of_delivery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="crafty_handsModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="warehouse">
+            <EntityTypeMapping TypeName="crafty_handsModel.warehouse">
+              <MappingFragment StoreEntitySet="warehouse">
+                <ScalarProperty Name="ID_warehouse" ColumnName="ID_warehouse" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product_ID" ColumnName="product_ID" />
+                <ScalarProperty Name="supplier_ID" ColumnName="supplier_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
